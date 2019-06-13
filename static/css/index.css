@@ -1,12 +1,9 @@
 body {
-  background: linear-gradient(80deg, #EECFBA, #C5DDE8);;
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
 }
 
-.my-center-vertical-index {
-  margin-top: 25%;
-  margin-bottom: 25%;
-}
-
-h1 {
-  margin-top: 1%;
+#predict-text-form {
+  width: 37%;
 }
