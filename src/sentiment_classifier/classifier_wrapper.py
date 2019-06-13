@@ -11,6 +11,7 @@ class SentimentClassifier():
             1 : 'pos'
         }
 
+    # интерпритация предсказанной вероятности
     @staticmethod
     def get_probability_words(probability):
         if probability < 0.5:

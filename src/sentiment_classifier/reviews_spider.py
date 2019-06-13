@@ -1,6 +1,7 @@
 import scrapy
 import re
 
+# Получить оценку на отзыве
 def get_mark(raw_str):
     result = re.findall(r'(\d{3})px', raw_str)
     if len(result) != 0:
@@ -13,7 +14,8 @@ def get_mark(raw_str):
         return 0
     else:
         return 1
-    
+
+# Получить текст отзыва
 def get_review(review_response):
     review = review_response.xpath('div')
     if len(review) != 0:
@@ -32,12 +34,14 @@ def get_review(review_response):
 class ReviewsSpider(scrapy.Spider):
     name = "Отзывы на мобильные телефоны"
     
+    # начальный запрос
     def start_requests(self):
         start_urls = urls
         
         for url in start_urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
+    # парсинг страницы
     def parse(self, response):
         for element in response.xpath('/html/body/div[1]/div[2]/div[1]/div/div/div[5]/div'):
             review = get_review(element)
@@ -47,7 +51,8 @@ class ReviewsSpider(scrapy.Spider):
                     'review' : review[0],
                     'target' : review[1]
                 }
-            
+
+# список страниц для парсинга
 urls = [
     'https://slonrekomenduet.com/model/htc-wildfire-s.html',
     'https://slonrekomenduet.com/model/htc-wildfire-s/page/2.html',

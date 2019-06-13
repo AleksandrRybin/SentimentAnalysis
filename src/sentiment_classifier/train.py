@@ -7,8 +7,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier
 
+# преобразование tf-idf
 transformer = TfidfVectorizer(max_df=0.85, min_df=0.003, ngram_range=(1, 2))
 
+# Логистическая регрессия с elasticnet регуляризацией
+# и оптимизатором SGD
 sgdc = SGDClassifier(random_state=1234, 
 max_iter=10000, tol=0.0001, class_weight='balanced', penalty='elasticnet',
 alpha=0.0001, l1_ratio=0.15, loss='log')
