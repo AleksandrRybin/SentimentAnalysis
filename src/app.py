@@ -1,8 +1,8 @@
-from sentiment_classifier import SentimentClassifier
+from .sentiment_classifier.classifier_wrapper import SentimentClassifier
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
-classifier = SentimentClassifier('mobile_review_clf.dat')
+classifier = SentimentClassifier()
 
 @app.route('/predict', methods=['POST'])
 def prediction():
@@ -17,5 +17,3 @@ def prediction():
 @app.route('/')
 def index_page():
     return render_template('index.html')
-
-app.run(debug=True)

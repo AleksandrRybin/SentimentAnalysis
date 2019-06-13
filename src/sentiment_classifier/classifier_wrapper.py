@@ -1,8 +1,11 @@
-from sklearn.externals import joblib
+import sklearn
+import joblib
+from os import path
 
 class SentimentClassifier():
-    def __init__(self, path):
-        self.model = joblib.load(path)
+    def __init__(self):
+        this_dir, *_ = path.split(__file__)
+        self.model = joblib.load(path.join(this_dir, 'mobile_review_clf.dat'))
         self.classes_dict = {
             0 : 'neg', 
             1 : 'pos'
