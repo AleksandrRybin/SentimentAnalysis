@@ -1,5 +1,10 @@
+# std
+import logging
+
+# Flask
 from flask import Flask, render_template, request, jsonify
 
+# locals
 from .classifier_wrapper import SentimentClassifier
 
 app = Flask(__name__)

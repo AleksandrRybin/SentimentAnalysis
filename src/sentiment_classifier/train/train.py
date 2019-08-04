@@ -1,9 +1,14 @@
+# std
 import argparse
 from os import path
 
+# pandas
 import pandas as pd
+
+# joblib
 import joblib as jb
 
+# scikit-learn
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier

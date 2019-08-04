@@ -1,6 +1,11 @@
+# std
+import logging
 from os import path
 
+# scikit-learn
 import sklearn
+
+# joblib
 import joblib as jb
 
 class SentimentClassifier():
