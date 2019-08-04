@@ -1,8 +1,9 @@
-from .sentiment_classifier.classifier_wrapper import SentimentClassifier
 from flask import Flask, render_template, request, jsonify
 
+from .sentiment_classifier.classifier_wrapper import SentimentClassifier
+
 app = Flask(__name__)
-classifier = SentimentClassifier() # классификатор
+classifier = SentimentClassifier()
 
 @app.route('/predict', methods=['POST'])
 def prediction():
@@ -10,8 +11,8 @@ def prediction():
     result, prediction = classifier.get_prediction_message(text)
 
     return jsonify({
-        'status' : result,   # результат 'failed' или степень уверенности классификатора
-        'class' : prediction # предсказанный класс  или None в случае ошибки
+        'status' : result,   # 'failed' or classifier's confidence
+        'class' : prediction # predicted class or None if error
     })
 
 @app.route('/')
