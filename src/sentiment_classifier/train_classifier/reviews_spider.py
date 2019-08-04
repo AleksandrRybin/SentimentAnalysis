@@ -1,7 +1,7 @@
 import scrapy
 import re
 
-# Получить оценку на отзыве
+# get review mark
 def get_mark(raw_str):
     result = re.findall(r'(\d{3})px', raw_str)
     if len(result) != 0:
@@ -15,7 +15,7 @@ def get_mark(raw_str):
     else:
         return 1
 
-# Получить текст отзыва
+# get review text
 def get_review(review_response):
     review = review_response.xpath('div')
     if len(review) != 0:
@@ -32,9 +32,9 @@ def get_review(review_response):
         return None
         
 class ReviewsSpider(scrapy.Spider):
-    name = "Отзывы на мобильные телефоны"
+    name = "Mobile review parser"
 
-    # начальный запрос
+    # request to start
     def start_requests(self):
         try:
             with open('urls_to_parse.txt', 'r') as urls_to_parse:
@@ -47,13 +47,12 @@ class ReviewsSpider(scrapy.Spider):
         for url in start_urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
-    # парсинг страницы
+    # parse response to get review
     def parse(self, response):
         for element in response.xpath('/html/body/div[1]/div[2]/div[1]/div/div/div[5]/div'):
             review = get_review(element)
             
-            if review != None:
-                yield {
-                    'review' : review[0],
-                    'target' : review[1]
-                }
+            yield {
+                'review' : review[0],
+                'target' : review[1]
+            }
