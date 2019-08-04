@@ -38,14 +38,22 @@ class ReviewsSpider(scrapy.Spider):
     # request to start
     def start_requests(self):
         try:
-            with open('urls_to_parse.txt', 'r') as urls_to_parse:
-                start_urls = urls_to_parse.readlines()
+            # you can provide filename with "-a urls_to_parse=<filename>"
+            urls_to_parse_filename = getattr(
+                self, 
+                'urls_to_parse', 
+                'urls_to_parse.txt'
+            )
+
+            with open(urls_to_parse_filename, 'r') as urls_to_parse_file:
+                urls = urls_to_parse_file.readlines()
+
         except Exception as e:
             print(e)
             print('Unable open file with urls to parse')
             raise RuntimeError
 
-        for url in start_urls:
+        for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
     # parse response to get review
