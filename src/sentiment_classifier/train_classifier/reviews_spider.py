@@ -33,7 +33,7 @@ def get_review(review_response):
         return None
         
 class ReviewsSpider(scrapy.Spider):
-    name = "Mobile review parser"
+    name = "Mobile reviews parser"
 
     # request to start
     def start_requests(self):
