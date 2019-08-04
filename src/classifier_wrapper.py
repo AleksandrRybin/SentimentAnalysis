@@ -10,10 +10,19 @@ import joblib as jb
 
 class SentimentClassifier():
     def __init__(self):
-        self.model = jb.load(
-            path.join('sentiment_classifier', 'data', 'mobile_review_clf.dat')
-        )
-        
+        logging.debug('loading model')
+
+        try:
+            self.model = jb.load(
+                path.join('sentiment_classifier', 'data', 'mobile_review_clf.dat')
+            )
+        except Exception as e:
+            logging.exception('exception occurred while loading model')
+            logging.critical('Unable load model')
+            exit(1)
+
+        logging.debug('model loaded')
+
         self.classes_dict = {
             0 : 'neg', 
             1 : 'pos'
@@ -33,7 +42,8 @@ class SentimentClassifier():
         try:
             return self.model.predict([text])[0],\
                    self.model.predict_proba([text])[0].max()
-        except:
+        except Exception as e:
+            logging.exception('exception occurred while predicting')
             return None
 
     def get_prediction_message(self, text):
@@ -45,4 +55,5 @@ class SentimentClassifier():
             return self.get_probability_words(probability_prediction),\
                    self.classes_dict[class_prediction]
         else:
+            logging.warn("can't get prediction")
             return 'failed', None
