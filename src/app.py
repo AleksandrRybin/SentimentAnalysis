@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 
-from .sentiment_classifier.classifier_wrapper import SentimentClassifier
+from .classifier_wrapper import SentimentClassifier
 
 app = Flask(__name__)
 classifier = SentimentClassifier()

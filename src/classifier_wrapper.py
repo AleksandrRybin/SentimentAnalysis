@@ -5,8 +5,9 @@ import joblib as jb
 
 class SentimentClassifier():
     def __init__(self):
-        this_dir, *_ = path.split(__file__)
-        self.model = jb.load(path.join(this_dir, 'data', 'mobile_review_clf.dat'))
+        self.model = jb.load(
+            path.join('sentiment_classifier', 'data', 'mobile_review_clf.dat')
+        )
         self.classes_dict = {
             0 : 'neg', 
             1 : 'pos'
