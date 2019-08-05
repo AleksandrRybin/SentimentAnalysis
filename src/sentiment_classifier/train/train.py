@@ -17,11 +17,20 @@ g_random_state = 1234
 
 arg_parser = argparse.ArgumentParser(description='Train sentiment classifier')
 
-arg_parser.add_argument('--data_folder', dest='data', default='data', 
-help='Path to train folder')
+arg_parser.add_argument('--data_folder', 
+                        dest='data', default='data', 
+                        help='Path to train folder'
+)
 
-arg_parser.add_argument('--reviews_fname', dest='reviews', default='reviews.json', 
-help='File with train data. Must be json format')
+arg_parser.add_argument('--reviews_fname', 
+                        dest='reviews', default='reviews.json', 
+                        help='File with train data. Must be json format'
+)
+
+arg_parser.add_argument('--classifier_fname', 
+                        dest='classifier', default='mobile_review_clf.dat', 
+                        help='File to serialize trained classifier'
+)
 
 arg_parser.parse_args()
 
@@ -42,4 +51,4 @@ classifier = Pipeline([
 train_data = pd.read_json(path.join(arg_parser.data, arg_parser.reviews))
 classifier.fit(train_data['review'], train_data['target'])
 
-jb.dump(classifier, path.join(arg_parser.data, 'mobile_review_clf.dat'))
+jb.dump(classifier, path.join(arg_parser.data, arg_parser.classifier))
