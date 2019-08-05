@@ -13,9 +13,10 @@ class SentimentClassifier():
         logging.debug('loading model')
 
         try:
-            self.model = jb.load(
-                path.join('sentiment_classifier', 'data', 'mobile_review_clf.dat')
-            )
+            self.model = jb.load(path.join(
+                path.dirname(__file__), 
+                'sentiment_classifier', 'data', 'mobile_review_clf.dat'
+            ))
         except Exception as e:
             logging.exception('exception occurred while loading model')
             logging.critical('Unable load model')
