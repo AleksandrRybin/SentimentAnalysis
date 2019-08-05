@@ -8,10 +8,16 @@ from flask import Flask, render_template, request, jsonify
 from .classifier_wrapper import SentimentClassifier
 
 logging.info('creating application')
+
 app = Flask(__name__)
 
+logging.info('application created')
+
 logging.info('loading classifier')
+
 classifier = SentimentClassifier()
+
+logging.info('classifier loaded')
 
 @app.route('/predict', methods=['POST'])
 def prediction():
