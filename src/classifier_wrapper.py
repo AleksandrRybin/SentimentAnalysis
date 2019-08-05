@@ -19,7 +19,7 @@ class SentimentClassifier():
             ))
         except:
             logging.exception('exception occurred while loading model')
-            logging.critical('Unable load model')
+            logging.critical('unable load model')
             exit(1)
 
         logging.debug('model loaded')
@@ -43,7 +43,7 @@ class SentimentClassifier():
         try:
             return self.model.predict([text])[0],\
                    self.model.predict_proba([text])[0].max()
-        except Exception as e:
+        except:
             logging.exception('exception occurred while predicting')
             return None
 
