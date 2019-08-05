@@ -1,5 +1,6 @@
 # std
 import re
+from os import path
 
 # scrapy
 import scrapy
@@ -40,6 +41,13 @@ class ReviewsSpider(scrapy.Spider):
     # request to start
     def start_requests(self):
         try:
+            # you can provide filename with "-a data_dir=<path/to/dir>"
+            data_dir = getattr(
+                self,
+                'data_dir',
+                'data'
+            )
+
             # you can provide filename with "-a urls_to_parse=<filename>"
             urls_to_parse_filename = getattr(
                 self, 
@@ -47,7 +55,8 @@ class ReviewsSpider(scrapy.Spider):
                 'urls_to_parse.txt'
             )
 
-            with open(urls_to_parse_filename, 'r') as urls_to_parse_file:
+            with open(path.join(data_dir, urls_to_parse_filename), 'r') \
+            as urls_to_parse_file:
                 urls = urls_to_parse_file.readlines()
 
         except Exception as e:
