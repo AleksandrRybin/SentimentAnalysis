@@ -17,7 +17,7 @@ class SentimentClassifier():
                 path.dirname(__file__), 
                 'sentiment_classifier', 'data', 'mobile_review_clf.dat'
             ))
-        except Exception as e:
+        except:
             logging.exception('exception occurred while loading model')
             logging.critical('Unable load model')
             exit(1)
