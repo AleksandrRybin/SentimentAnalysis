@@ -27,9 +27,9 @@ def prediction():
     result, prediction = classifier.get_prediction_message(text)
 
     if result != 'failed':
-        logging.info('success %s %s', result, prediction)
+        logging.info('[success] %s %s', result, prediction)
     else:
-        logging.warn('failed')
+        logging.warn('[failed]')
 
     return jsonify({
         'status' : result,   # 'failed' or classifier's confidence
