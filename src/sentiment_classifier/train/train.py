@@ -32,7 +32,7 @@ arg_parser.add_argument('--classifier_fname',
                         help='File to serialize trained classifier'
 )
 
-arg_parser.parse_args()
+args = arg_parser.parse_args()
 
 # tf-idf transform
 transformer = TfidfVectorizer(max_df=0.85, min_df=0.003, ngram_range=(1, 2))
@@ -48,7 +48,7 @@ classifier = Pipeline([
     ('SGDC', sgdc)
     ])
 
-train_data = pd.read_json(path.join(arg_parser.data, arg_parser.reviews))
+train_data = pd.read_json(path.join(args.data, args.reviews))
 classifier.fit(train_data['review'], train_data['target'])
 
-jb.dump(classifier, path.join(arg_parser.data, arg_parser.classifier))
+jb.dump(classifier, path.join(args.data, args.classifier))
